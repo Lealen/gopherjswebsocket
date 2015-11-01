@@ -197,6 +197,13 @@ func getFrameData(obj *js.Object) []byte {
 	return []byte(obj.String())
 }
 
+func (c *Conn) GetReadBufLength() int {
+	if c.readBuf != nil {
+		return c.readBuf.Len()
+	}
+	return 0
+}
+
 func (c *Conn) Read(b []byte) (n int, err error) {
 	if c.readBuf != nil {
 		n, err = c.readBuf.Read(b)
